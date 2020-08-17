@@ -40,9 +40,15 @@ pub struct GameGenerator<S:PickingStrategy>
     phantom : PhantomData<S>,
 }
 
+
 impl<S:PickingStrategy> GameGenerator<S> {
     pub fn new(num_games : usize) -> Self {
         GameGenerator::<S> {num_games, phantom : PhantomData}
+    }
+
+    /// get number of games that this generator produces
+    pub fn len(&self) -> usize {
+        self.num_games
     }
 }
 
