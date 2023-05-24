@@ -8,11 +8,10 @@ use crate::orchard::statistics::WinLossStatistic;
 
 fn main() {
 
-   let num_games : usize = 10000000;
-
+   let num_games : usize = 1000000;
 
    let tic = std::time::SystemTime::now();
-   let in_order_stat = accumulate_statistics_seq(WinLossStatistic::default(), GameGenerator::<InOrderPickingStrategy>::new(num_games));
+   let in_order_stat = accumulate_statistics_par(WinLossStatistic::default(), GameGenerator::<InOrderPickingStrategy>::new(num_games));
    let toc = std::time::SystemTime::now();
 
    let duration = toc.duration_since(tic).expect("Error querying system time");

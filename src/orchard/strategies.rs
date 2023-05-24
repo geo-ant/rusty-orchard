@@ -36,7 +36,7 @@ impl PickingStrategy for RandomPickingStrategy {
     }
 }
 
-fn find_first_nonempty_index(fruits : &[u32]) -> Option<usize>{
+fn find_first_nonempty_index(fruits : &[u8]) -> Option<usize>{
      for idx in 0..fruits.len()
      {
         if fruits[idx] > 0
@@ -47,8 +47,8 @@ fn find_first_nonempty_index(fruits : &[u32]) -> Option<usize>{
     return None;
 }
 
-fn find_random_nonempty_index(fruits : &[u32]) -> Option<usize> {
-    if fruits.iter().sum::<u32>() == 0 {
+fn find_random_nonempty_index(fruits : &[u8]) -> Option<usize> {
+    if fruits.iter().sum::<u8>() == 0 {
         return None;
     }
 

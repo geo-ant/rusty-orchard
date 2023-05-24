@@ -4,9 +4,9 @@ use super::strategies::PickingStrategy;
 /// number of trees in game
 pub const TREE_COUNT : usize = 4;
 /// maximum number of ravens (i.e. the number of ravens at which the game is lost)
-pub const MAX_RAVEN_COUNT : u32 = 9;
+pub const MAX_RAVEN_COUNT : u8 = 9;
 /// number of initial fruit on each tree
-pub const INITIAL_FRUIT_COUNT : u32 = 10;
+pub const INITIAL_FRUIT_COUNT : u8 = 10;
 
 #[derive(Debug)]
 pub enum Game
@@ -41,22 +41,22 @@ impl Game
 #[derive(Debug)]
 pub struct WinningState
 {
-    pub turn_count : u32,
-    pub raven_count : u32
+    pub turn_count : u8,
+    pub raven_count : u8
 }
 
 #[derive(Debug)]
 pub struct LosingState
 {
-    pub turn_count : u32,
-    pub total_fruit_count : u32
+    pub turn_count : u8,
+    pub total_fruit_count : u8
 }
 
 #[derive(Debug)]
 pub struct GameState {
-    pub fruit_count: [u32; TREE_COUNT as usize],
-    pub turn_count: u32,
-    pub raven_count: u32
+    pub fruit_count: [u8; TREE_COUNT as usize],
+    pub turn_count: u8,
+    pub raven_count: u8
 }
 
 impl GameState {
@@ -83,15 +83,15 @@ impl GameState {
     }
 
     pub fn pick_with_strategy<S:PickingStrategy> (&mut self) {
-        let prev_sum : u32= self.fruit_count.iter().sum();
+        let prev_sum : u8= self.fruit_count.iter().sum();
         S::try_pick_two_fruits(self);
         self.add_turn();
-        let sum_after : u32 = self.fruit_count.iter().sum();
+        let sum_after : u8 = self.fruit_count.iter().sum();
         assert!(prev_sum-sum_after<=2, "More than two fruit have been picked by a strategy");
     }
 
     pub fn is_won(&self) -> bool {
-        self.fruit_count.iter().sum::<u32>() == 0
+        self.fruit_count.iter().sum::<u8>() == 0
     }
 
     pub fn is_lost(&self) -> bool {
